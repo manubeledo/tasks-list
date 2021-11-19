@@ -8,16 +8,17 @@ function serverRouter(app){
     
     router.get("/", async (req, res, next) => {
         let data = await dbhelpers.showTasks()
-        // console.log(data);
         res.render('index', {data: data})
     })
-    router.post('/delete', async (req, res, next) => {
+    router.post('/delete', async (req, res) => {
         await dbhelpers.deleteTask(req.body.id)
-        // let data = await dbhelpers.showTasks()
-        console.log(req.body.id)
         res.redirect('/')
     })
-    // router.post('/', controller.created);
+    router.post('/', controller.created);
+    router.post('/checked', controller.checked);
+    router.post('/edit', controller.edited);
+
+
     // router.post('/edit', controller.edited);
 }
 

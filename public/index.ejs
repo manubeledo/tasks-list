@@ -7,34 +7,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" 
     integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/styles.css" type="text/html">
+    <link rel="stylesheet" href="../public/css/styles.css" type="text/html">
     <title>Tasks List</title>
 </head>
 
 <body>
 
-    <div style="border: 2px solid black; max-width: 500px; margin: 100px auto; height: 500px;">
-    <h1 style="text-align: center; margin-top: 20px">To do list</h1>
-    <div id ="tasks-list" style="border: 2px solid blue; max-width: 370px; margin: 20px 15px 30px 60px ; height: 300px; display:block; overflow:auto;">
+    <!-- Start To do LIST-->
+
+    <div style="border: 2px solid rgb(145, 135, 135); max-width: 500px; margin: 100px auto; height: 270px;">
+    <h2 style="margin-top: 20px; margin-left: 55px">To do list</h2>
+    <div id ="tasks-list" style="max-width: 370px; margin: 20px 15px 30px 60px ; height: 100px; display:block; overflow:auto;">
 
         <% for (let i=0; i<data.length; i++) {%>
         <div class="ui checked checkbox" style="display: flex; justify-content: space-between;">
-            <input type="checkbox" checked="">
-            <label><%= data[i].task %></label>
+            <% if (data[i].check == 1) {%> 
+            <input type="checkbox" checked="" class="checked" id="<%=data[i].id%>"/>
+            <% } else { %>
+            <input type="checkbox" class="notchecked" id="<%=data[i].id%>"/>
+            <% } %>
+            <label id="note-<%=data[i].id%>"><%= data[i].task %></label>
             <div>
             <button id="<%=data[i].id%>" class="btn-edit">Edit</button>
             <button id="<%=data[i].id%>" class="btn-delete">Delete</button>
             </div>
         </div>
         <% } %>
+
     </div>
+
     <form action="http://localhost:8080/api/tasks" method="POST" name="upload_img_form">
         <div class="ui action input" style="margin: 0px 60px;">
             <input type="text" name="newtask" placeholder="New task..." style="width: 300px;">
             <button class="ui button">Add</button>
         </div>
     </form>
+
+    </div> 
+
+    <!-- End To do LIST-->
+
+    <!-- Form edit tasks -->
+
+    <div id="edit-div" style="border: 2px solid rgb(145, 135, 135); max-width: 500px; margin: 100px auto; height: 270px; display: flex; align-items: center; flex-direction: column;"">
+        <div>
+            <h2 style="margin-top: 20px; margin-left: 0px; float: left">Editing Task</h2>
+            <h2 style="margin: 20px 0 0 10px; float: left;" id="task-to-edit">"Edit task"</h2>
+        </div>
+    
+    <form action="http://localhost:8080/api/tasks/edit" method="POST" name="upload_img_form">
+        <div class="ui action input" style="margin: 50px 60px">
+            <input type="text" name="newtask" placeholder="new task" style="width: 300px;">
+            <input id="input-edit" name="idname" type="hidden" value="">
+            <button type="submit" class="ui button">Save</button>
+        </div>
+    </form>
+    
+    <button class="ui button">Cancel</button>
+    
     </div>
+
+    <!-- END of Form edit tasks -->
+
 
     <script src="../scripts/index.js"></script>
 </body>

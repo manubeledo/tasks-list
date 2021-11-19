@@ -1,18 +1,39 @@
 const dbhelpers = require('../models/dbHelpers')
 
 
-// Despues modificar como escribir la tarea.
 const created = async (req, res) => {
     try{
         const task = {
             user: "user", 
             task: req.body.newtask,
-            check: true
+            check: false
         }
         await dbhelpers.addTask(task)
         let data = await dbhelpers.showTasks()
-        console.log(data);
+        console.log("Desde created", data);
         res.render('index', {data: data});
+    } catch (err){
+        res.status(400).json(err.message)
+    }
+}
+
+const checked = async (req, res) => {
+    try{
+        let data = await dbhelpers.updateTask(req.body.id)
+        res.render('index', {data: data});
+    } catch (err){
+        res.status(400).json(err.message)
+    }
+}
+        
+const edited = async (req, res) => {
+    try{
+        id = req.body.idname
+        newTask = req.body.newtask
+        console.log(id, " + ", newTask);
+        await dbhelpers.editTask(id, newTask)
+        // res.render('index', {data: data});
+        res.redirect('/api/tasks');
     } catch (err){
         res.status(400).json(err.message)
     }
@@ -20,5 +41,7 @@ const created = async (req, res) => {
 
 module.exports = {
     created,
+    checked,
+    edited
 }
 

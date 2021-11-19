@@ -3,21 +3,15 @@ const db = require("../config/db");
 module.exports = {
     addTask,
     showTasks,
-    deleteTask
+    deleteTask,
+    updateTask,
+    takeTask,
+    editTask
 }
-
-// ,
-//     editTask,
-//     updateTask,
-//     deleteTask
-
-// async function addTask(newtask){
-//     const [id] = await db('messages').insert(newtask);
-//     return id;
-// }
 
 async function addTask(newTask){
     try {
+        console.log("Se inserto una nueva tarea")
         await db('tasks').insert(newTask);
     } 
     catch(err){
@@ -47,6 +41,46 @@ async function deleteTask(numid){
     try {
         await db('tasks').where('id', numid).del()
         console.log(`Tarea con el id ${numid} eliminada`)
+    } 
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function updateTask(numid){
+    try {
+        let data = await db('tasks').select("id", "user", "task", "check").where({id : numid})
+        await db('tasks').where('id', numid).del()
+        if(data[0].check == 1){
+            data[0].check = 0
+        } else {
+            data[0].check = 1
+        }
+        await addTask(data)
+        await showTasks()
+    } 
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function takeTask(numid){
+    try {
+        let data = await db('tasks').select("id", "user", "task", "check").where({id : numid})
+        return data
+    } 
+    catch(err){
+        console.log(err)
+    }
+}
+
+async function editTask(numid, newTask){
+    try {
+        let data = await db('tasks').select("id", "user", "task", "check").where({id : numid})
+        await db('tasks').where('id', numid).del()
+        data[0].task = newTask
+        await addTask(data)
+        await showTasks()
     } 
     catch(err){
         console.log(err)

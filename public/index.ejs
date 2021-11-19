@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" 
+    integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/styles.css" type="text/html">
+    <title>Tasks List</title>
+</head>
+
+<body>
+
+    <div style="border: 2px solid black; max-width: 500px; margin: 100px auto; height: 500px;">
+    <h1 style="text-align: center; margin-top: 20px">To do list</h1>
+    <div id ="tasks-list" style="border: 2px solid blue; max-width: 370px; margin: 20px 15px 30px 60px ; height: 300px; display:block; overflow:auto;">
+
+        <% for (let i=0; i<data.length; i++) {%>
+        <div class="ui checked checkbox" style="display: flex; justify-content: space-between;">
+            <input type="checkbox" checked="">
+            <label><%= data[i].task %></label>
+            <div>
+            <button id="<%=data[i].id%>" class="btn-edit">Edit</button>
+            <button id="<%=data[i].id%>" class="btn-delete">Delete</button>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <form action="http://localhost:8080/api/tasks" method="POST" name="upload_img_form">
+        <div class="ui action input" style="margin: 0px 60px;">
+            <input type="text" name="newtask" placeholder="New task..." style="width: 300px;">
+            <button class="ui button">Add</button>
+        </div>
+    </form>
+    </div>
+
+    <script src="../scripts/index.js"></script>
+</body>
+</html>

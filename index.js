@@ -12,8 +12,6 @@ app.use("/api/task", express.static('/public/css'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use(cors('*'));
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");

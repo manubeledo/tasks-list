@@ -29,7 +29,7 @@ tasks.addEventListener('click', e => {
 
 edit.addEventListener('click', e => {
     if (e.target.id == 'btn-cancel')
-    window.location = window.location.href;
+    window.location = window.location.href
 })
 
 async function deleteTaskById(data){
@@ -39,7 +39,7 @@ async function deleteTaskById(data){
             body: JSON.stringify(data),
             headers:{ 'Content-Type': 'application/json' }
         })
-        window.location = window.location.href;
+        window.location = window.location.href
     }
     catch(err){
         console.log(err);
@@ -53,10 +53,10 @@ async function changeNoteState(check){
             body: JSON.stringify(check),
             headers:{ 'Content-Type': 'application/json' }
         })
-        window.location = window.location.href;
+        window.location = window.location.href
     }
     catch(err){
-        console.log(err);
+        console.log(err)
     }
 }
 
@@ -67,7 +67,7 @@ async function renderNote(idNote){
             body: JSON.stringify(idNote),
             headers:{ 'Content-Type': 'application/json' }
         })
-        window.location = window.location.href;
+        window.location = window.location.href
     }
     catch(err){
         console.log(err);

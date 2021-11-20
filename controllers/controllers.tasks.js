@@ -30,7 +30,7 @@ const edited = async (req, res) => {
         id = req.body.idname
         newTask = req.body.newtask
         await dbhelpers.editTask(id, newTask)
-        res.redirect('/api/tasks');
+        res.redirect('/api/tasks')
     } catch (err){
         res.status(400).json(err.message)
     }

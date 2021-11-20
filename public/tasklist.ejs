@@ -1,0 +1,32 @@
+<div style="border: 2px solid rgb(145, 135, 135); max-width: 500px; margin: 100px auto; height: 270px;">
+    <h2 style="margin-top: 20px; margin-left: 55px">To do list</h2>
+    <div id ="tasks-list" class="prueba" style="max-width: 370px; margin: 20px 15px 30px 60px ; height: 100px; display:block; overflow:auto;">
+
+        <% for (let i=0; i<data.length; i++) {%>
+
+        <div class="ui checked checkbox" style="display: flex; justify-content: space-between;">
+            
+            <% if (data[i].check == 1) {%> 
+                <input type="checkbox" checked="" class="checked" id="<%=data[i].id%>"/>
+            <% } else { %>
+                <input type="checkbox" class="notchecked" id="<%=data[i].id%>"/>
+            <% } %>
+
+            <label id="note-<%=data[i].id%>"><%= data[i].task %></label>
+            <div>
+            <button id="<%=data[i].id%>" class="btn-edit">Edit</button>
+            <button id="<%=data[i].id%>" class="btn-delete">Delete</button>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+
+    <form action="http://localhost:8080/api/tasks" method="POST">
+        <div class="ui action input" style="margin: 0px 60px;">
+            <input type="text" name="newtask" placeholder="Add new task..." style="width: 300px;">
+            <button class="ui button">Add</button>
+        </div>
+    </form>
+
+    </div> 

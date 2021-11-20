@@ -1,0 +1,17 @@
+<div id="edit-div" style="border: 2px solid rgb(145, 135, 135); max-width: 500px; margin: 100px auto; height: 270px; display: flex; align-items: center; flex-direction: column;"">
+    <div>
+        <h2 style="margin-top: 20px; margin-left: 0px; float: left">Editing Task</h2>
+        <h2 style="margin: 20px 0 0 10px; float: left;" id="task-to-edit">"Edit task"</h2>
+    </div>
+
+<form action="http://localhost:8080/api/tasks/edit" method="POST" name="upload_img_form">
+    <div class="ui action input" style="margin: 50px 60px">
+        <input id="new-task" type="text" name="newtask" placeholder="new-task" style="width: 300px;">
+        <input id="input-edit" name="idname" type="hidden" value="">
+        <button type="submit" class="ui button">Save</button>
+    </div>
+</form>
+
+<button id="btn-cancel" class="ui button">Cancel</button>
+
+</div>

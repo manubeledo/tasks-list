@@ -11,12 +11,10 @@ module.exports = {
 
 async function addTask(newTask){
     try {
-        console.log("Se inserto una nueva tarea")
         await db('tasks').insert(newTask);
     } 
     catch(err){
             console.log("ERROR DESDE addTask", err);
-            // await db('tasks').insert(newTask);
     }
 }
 
@@ -33,14 +31,12 @@ async function showTasks(){
             table.string('task', 1000).notNullable();
             table.boolean('check', 1000).notNullable();
             })
-            // await db('tasks').insert(newTask);
     }
 }
 
 async function deleteTask(numid){
     try {
         await db('tasks').where('id', numid).del()
-        console.log(`Tarea con el id ${numid} eliminada`)
     } 
     catch(err){
         console.log(err)
@@ -57,7 +53,6 @@ async function updateTask(numid){
             data[0].check = 1
         }
         await addTask(data)
-        await showTasks()
     } 
     catch(err){
         console.log(err)

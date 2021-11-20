@@ -10,7 +10,6 @@ const created = async (req, res) => {
         }
         await dbhelpers.addTask(task)
         let data = await dbhelpers.showTasks()
-        console.log("Desde created", data);
         res.render('index', {data: data});
     } catch (err){
         res.status(400).json(err.message)
@@ -20,7 +19,7 @@ const created = async (req, res) => {
 const checked = async (req, res) => {
     try{
         let data = await dbhelpers.updateTask(req.body.id)
-        res.render('index', {data: data});
+        res.redirect('/api/tasks');
     } catch (err){
         res.status(400).json(err.message)
     }
@@ -30,10 +29,26 @@ const edited = async (req, res) => {
     try{
         id = req.body.idname
         newTask = req.body.newtask
-        console.log(id, " + ", newTask);
         await dbhelpers.editTask(id, newTask)
-        // res.render('index', {data: data});
         res.redirect('/api/tasks');
+    } catch (err){
+        res.status(400).json(err.message)
+    }
+}
+
+const deleted = async (req, res) => {
+    try{
+        await dbhelpers.deleteTask(req.body.id)
+        res.redirect('/')
+    } catch (err){
+        res.status(400).json(err.message)
+    }
+}
+
+const rendered = async (req, res) => {
+    try{
+        let data = await dbhelpers.showTasks()
+        res.render('index', {data: data})
     } catch (err){
         res.status(400).json(err.message)
     }
@@ -42,6 +57,8 @@ const edited = async (req, res) => {
 module.exports = {
     created,
     checked,
-    edited
+    edited,
+    deleted,
+    rendered
 }
 
